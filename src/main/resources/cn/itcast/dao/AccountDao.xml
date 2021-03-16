@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--解决查询结果和实体类属性名不一致时可以使用resultMap将查询结果列名和实体类属性名进行对应
+	也可以给查询结果进行取列别名的方式进行对应-->
+<!-- namespace：命名空间，用于隔离sql-->
+<mapper namespace="cn.itcast.dao.AccountDao">
+
+    <!--配置查询结果的列名和实体类的属性名的对应关系
+property:实体类变量名区分大小写
+column:数据库字段
+-->
+    <resultMap id="accountUserMap" type="cn.itcast.domain.Account">
+        <id property="id" column="id"></id>
+        <result property="name" column="name"></result>
+        <result property="money" column="money"></result>
+
+    </resultMap>
+    <!--查询方法一-->
+    <select id="findAll" resultMap="accountUserMap">
+	    select * from account ;
+	</select>
+
+    <!--保存-->
+    <select id="saveAccount" resultType="cn.itcast.domain.Account">
+		insert into account (name,money) values(#{name},#{money});
+	</select>
+
+
+
+</mapper>

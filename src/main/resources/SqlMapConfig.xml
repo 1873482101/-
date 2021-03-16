@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<!--ssm整合后不需要此文件，此文件配置被整合到了Spring整合MyBatis框架放在了applicationContext.xml-->
+<configuration>
+    <!-- 配置连接数据库的信息 -->
+    <properties resource="jdbcConfig.properties"></properties>
+    <!-- 配置mybatis的环境 -->
+    <environments default="mysql">
+        <environment id="mysql">
+            <!-- 配置事务管理 -->
+            <transactionManager type="JDBC"></transactionManager>
+            <dataSource type="pooled">
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!-- 指定映射文件位置 -->
+    <mappers>
+        <!--<mapper class="cn.itcast.dao.AccountDao"/>-->
+        <!--直接扫描包包内部的所有配置文件都可以被扫描-->
+        <package name="cn.itcast.dao"></package>
+        <!--<mapper resource="cn/itcast/dao/AccountDao.xml"/>-->
+    </mappers>
+</configuration>
